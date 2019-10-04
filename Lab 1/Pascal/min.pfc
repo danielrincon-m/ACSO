@@ -1,0 +1,32 @@
+program min;
+
+var
+    minimo:real;
+    number:real;
+    cant:integer;
+    i:integer;
+    
+begin
+    writeln('Escriba la cantidad de numeros del vector: ');
+    readln(cant);
+    for i:=0 to cant - 1 do
+    begin
+        write('Escriba el numero #');
+        write(i + 1);
+        writeln(': ');
+        readln(number);
+        if (i=0) then
+        begin 
+            minimo := number;
+        end
+        else
+        begin
+            if(number < minimo) then
+            begin
+                minimo := number;
+            end
+        end
+    end;
+    write('El minimo es: ');
+    writeln(minimo);
+end.

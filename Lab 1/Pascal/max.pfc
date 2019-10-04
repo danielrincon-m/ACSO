@@ -1,0 +1,26 @@
+program max;
+
+var num1:real;
+var num2:real;
+
+begin
+	writeln('Ingrese el primer real: ');
+	readln(num1);
+	writeln('Ingrese el segundo real: ');
+	readln(num2);
+	
+	if (num1 > num2) then 
+	begin
+        write('El maximo es: ');
+        writeln(num1);
+    end
+	else if (num2 > num1) then
+	begin
+	    write('El maximo es: ');
+	    writeln(num2);
+	end
+	else
+	begin
+	    writeln('Ambos numeros son iguales');
+	end
+end.

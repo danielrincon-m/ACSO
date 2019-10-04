@@ -1,0 +1,7 @@
+CHIP p3{
+	IN c;
+	OUT s;
+	
+	PARTS:
+	And(a=c, b=c, out=s);
+}

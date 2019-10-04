@@ -1,0 +1,10 @@
+CHIP p4{
+	IN a, b, c;
+	OUT y, z;
+	
+	PARTS:
+	Not(in=a, out=not1);
+	And(a=b, b=c, out=and1);
+	Xor(a=not1, b=and1, out=y);
+	Or(a=and1, b=c, out=z);
+}

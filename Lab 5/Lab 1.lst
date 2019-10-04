@@ -1,0 +1,107 @@
+     Assembly listing for: Lab 1.mas
+                Assembled: Thu Oct 03 18:59:15 COT 2019
+
+000 5000 |         INPUT             
+001 2039 |         STORE a           
+002 5000 |         INPUT             
+003 203A |         STORE b           
+004 5000 |         INPUT             
+005 203B |         STORE c           
+         |                          
+006 103E |         LOAD cont         
+007 403C |  whileb SUBT x            
+008 8000 |         SKIPCOND 000      
+009 9011 |         JUMP paso2        
+00A 103D |         LOAD aux          
+00B 303A |         ADD b             
+00C 203D |         STORE aux         
+00D 103E |         LOAD cont         
+00E 3038 |         ADD one           
+00F 203E |         STORE cont        
+010 9007 |         JUMP whileb       
+         |                          	
+011 103F |  paso2  LOAD res1         
+012 303D |         ADD aux           
+013 203F |         STORE res1        
+014 1037 |         LOAD cero         
+015 203D |         STORE aux         
+016 203E |         STORE cont        
+         |                          	
+017 403C |  whilex SUBT x            
+018 8000 |         SKIPCOND 000      
+019 9021 |         JUMP paso3        
+01A 103D |         LOAD aux          
+01B 303C |         ADD x             
+01C 203D |         STORE aux         
+01D 103E |         LOAD cont         
+01E 3038 |         ADD one           
+01F 203E |         STORE cont        
+020 9017 |         JUMP whilex       
+         |                          
+021 1040 |  paso3  LOAD res2         
+022 303D |         ADD aux           
+023 2040 |         STORE res2        
+024 1037 |         LOAD cero         
+025 203D |         STORE aux         
+026 203E |         STORE cont        
+         |                          
+027 4039 |  whilea SUBT a            
+028 8000 |         SKIPCOND 000      
+029 9031 |         JUMP paso4        
+02A 103D |         LOAD aux          
+02B 3040 |         ADD res2          
+02C 203D |         STORE aux         
+02D 103E |         LOAD cont         
+02E 3038 |         ADD one           
+02F 203E |         STORE cont        
+030 9027 |         JUMP whilea       
+         |                          
+031 103F |  paso4  LOAD res1         
+032 303D |         ADD aux           
+033 303B |         ADD c             
+034 2041 |         STORE rest        
+035 6000 |         OUTPUT            
+036 7000 |         HALT              
+         |                          
+037 0000 |  cero   DEC 0             
+038 0001 |  one    DEC 1             
+         |                          
+039 0000 |  a      DEC 0             
+03A 0000 |  b      DEC 0             
+03B 0000 |  c      DEC 0             
+03C 0002 |  x      DEC 2             
+         |                          
+03D 0000 |  aux    DEC 0             
+03E 0000 |  cont   DEC 0             
+03F 0000 |  res1   DEC 0             
+040 0000 |  res2   DEC 0             
+041 0000 |  rest   DEC 0             
+
+Assembly successful.
+
+         SYMBOL TABLE
+         --------------------------------------------------
+          Symbol | Defined | References 
+         --------+---------+-------------------------------
+          a      |   039   | 001, 027
+          aux    |   03D   | 00A, 00C, 012, 015, 01A, 01C, 
+                 |         | 022, 025, 02A, 02C, 032
+          b      |   03A   | 003, 00B
+          c      |   03B   | 005, 033
+          cero   |   037   | 014, 024
+          cont   |   03E   | 006, 00D, 00F, 016, 01D, 01F, 
+                 |         | 026, 02D, 02F
+          one    |   038   | 00E, 01E, 02E
+          paso2  |   011   | 009
+          paso3  |   021   | 019
+          paso4  |   031   | 029
+          res1   |   03F   | 011, 013, 031
+          res2   |   040   | 021, 023, 02B
+          rest   |   041   | 034
+          whilea |   027   | 030
+          whileb |   007   | 010
+          whilex |   017   | 020
+          x      |   03C   | 007, 017, 01B
+         --------------------------------------------------
+
+

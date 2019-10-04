@@ -1,0 +1,13 @@
+CHIP p1{
+	IN a, b, c, d, e ;
+	OUT s;
+	
+	PARTS:
+	And(a=d, b=e, out=and1);
+	And(a=c, b=d, out=and2);
+	And(a=b, b=c, out=and3);
+	And(a=a, b=b, out=and4);
+	Or(a=and1, b=and2, out=or1);
+	Or(a=and3, b=and4, out=or2);
+	Or(a=or1, b=or2, out=s);
+}

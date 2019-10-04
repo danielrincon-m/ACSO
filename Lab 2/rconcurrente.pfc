@@ -1,0 +1,137 @@
+program restaConcurrente;
+
+const
+	PROCESOS = 2;
+	SIZE = 1000;
+type
+	numArray = array[1..SIZE] of integer;
+	charArray = array[1..SIZE] of char;
+var
+	num1Char: charArray;
+	num2Char: charArray;
+	num1Int: numArray;
+	num2Int: numArray;
+	result: numArray;
+	
+process type subtract(var inf, sup: integer);
+var
+	i: integer;
+begin
+	{writeln(inf, ' ', sup);}
+	for i := inf to sup do
+	begin
+		if num1Int[SIZE - i + 1] - num2Int[SIZE - i + 1] < 0 then
+		begin
+			num1Int[SIZE - i + 1] := num1Int[SIZE - i + 1] + 10;
+			num1Int[SIZE - i] := num1Int[SIZE - i] - 1;
+		end;
+		result[SIZE - i + 1] := num1Int[SIZE - i + 1] - num2Int[SIZE - i + 1];
+	end;
+end;	
+
+
+procedure getCharInput;
+var
+	character: char;
+	index: integer;
+
+begin
+	index := 1;
+	repeat
+		read(character);
+		num1Char[index] := character;
+		index := index + 1;
+	until eoln;
+	index := 1;
+	read(character);
+	repeat
+		read(character);
+		num2Char[index] := character;
+		index := index + 1;
+	until eoln;
+end;
+
+
+procedure fillIntArray;
+var
+	i: integer;
+	intIndex: integer;
+
+begin
+	intIndex := SIZE;
+	for i := 1 to SIZE do
+	begin
+		if ord(num1Char[SIZE - i + 1]) <> 0 then
+		begin
+			num1Int[intIndex] := ord(num1Char[SIZE - i + 1]) - 48;
+			intIndex := intIndex - 1;
+		end;
+	end;
+	intIndex := SIZE;
+	for i := 1 to SIZE do
+	begin
+		if ord(num2Char[SIZE - i + 1]) <> 0 then
+		begin
+			num2Int[intIndex] := ord(num2Char[SIZE - i + 1]) - 48;
+			intIndex := intIndex - 1;
+		end;
+	end;
+{
+	for i := 1 to SIZE do
+	begin
+		write(num1Int[i]);
+	end;
+	writeln(' ');
+	for i := 1 to SIZE do
+	begin
+		write(num2Int[i]);
+	end;
+	writeln(' ');
+}
+end;
+
+
+procedure printAnswer;
+var
+	i: integer;
+	firstIndex: integer;
+begin
+	firstIndex := 1;
+	i := 1;
+	while result[i] = 0 do
+	begin
+		i := i + 1;
+		firstIndex := firstIndex + 1;
+	end;
+
+	for i := firstIndex to SIZE do
+	begin
+		write(result[i]);
+	end;
+end;
+
+
+var
+	p: array[1..PROCESOS] of subtract;
+	lower, upper: array[1..PROCESOS] of integer; 
+	i: integer;
+begin
+	getCharInput;	
+	fillIntArray;
+	cobegin
+		for i := 1 to PROCESOS do
+		begin
+			lower[i] := (i - 1) * (SIZE div PROCESOS) + 1 ;
+			upper[i] := i * (SIZE div PROCESOS);
+			{writeln(lower[i], ' ', upper[i]);}
+			p[i](lower[i], upper[i]);
+		end;
+	coend;
+{
+	for i := 1 to SIZE do
+	begin
+		write(result[i]);
+	end;
+}
+	printAnswer;
+end.

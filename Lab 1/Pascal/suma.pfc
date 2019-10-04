@@ -1,0 +1,15 @@
+program suma;
+
+var int1:integer;
+var int2:integer;
+var sum:integer;
+
+begin
+	writeln('Digite el entero #1: ');
+	readln(int1);
+	writeln('Digite el entero #2: ');
+	readln(int2);
+	sum := int1 + int2;
+	write('La suma de los numeros es: ');
+	writeln(sum);
+end.

@@ -1,0 +1,21 @@
+ -----------------
+ Symbol | Location
+ -------+---------
+ a      |   039
+ aux    |   03D
+ b      |   03A
+ c      |   03B
+ cero   |   037
+ cont   |   03E
+ one    |   038
+ paso2  |   011
+ paso3  |   021
+ paso4  |   031
+ res1   |   03F
+ res2   |   040
+ rest   |   041
+ whilea |   027
+ whileb |   007
+ whilex |   017
+ x      |   03C
+

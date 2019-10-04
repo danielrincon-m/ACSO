@@ -1,0 +1,75 @@
+	input
+	store	a
+	input
+	store	b
+	input
+	store	c
+
+	load	cont
+whileb,	subt	x
+	skipcond 000
+	jump	paso2
+	load	aux
+	add	b
+	store	aux
+	load	cont
+	add	one
+	store	cont
+	jump	whileb
+	
+paso2,	load	res1
+	add	aux
+	store	res1
+	load	cero
+	store	aux
+	store	cont
+	
+whilex,	subt 	x
+	skipcond 000
+	jump	paso3
+	load	aux
+	add	x
+	store	aux
+	load	cont
+	add	one
+	store	cont
+	jump	whilex
+
+paso3,	load	res2
+	add	aux
+	store	res2
+	load	cero
+	store	aux
+	store	cont
+
+whilea,	subt	a
+	skipcond 000
+	jump 	paso4
+	load	aux
+	add	res2
+	store	aux
+	load	cont
+	add	one
+	store	cont
+	jump	whilea
+
+paso4,	load	res1
+	add	aux
+	add	c
+	store	rest
+	output
+	halt
+
+cero,	dec	0
+one,	dec	1
+
+a,	dec 	0
+b,	dec 	0
+c,	dec 	0
+x,	dec 	2
+
+aux,	dec	0
+cont,	dec	0
+res1,	dec	0
+res2,	dec	0
+rest,	dec	0

@@ -1,0 +1,17 @@
+CHIP p2{
+	IN x,y,z;
+	OUT s;
+	
+	PARTS:
+	Not(in=x, out=not1);
+	Not(in=x, out=not2);
+	Not(in=y, out=not3);
+	Not(in=z, out=not4);
+	And(a=not1, b=z, out=and1);
+	And(a=not2, b=y, out=and2);
+	And(a=x, b=not3, out=and3);
+	And(a=x, b=not4, out=and4);
+	Or(a=and1, b=and2, out=or1);
+	Or(a=and3, b=and4, out=or2);
+	Or(a=or1, b=or2, out=s);
+}

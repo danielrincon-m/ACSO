@@ -1,0 +1,79 @@
+program calculadora;
+
+procedure suma;
+var
+    num1:real;
+    num2:real;
+    result:real;
+begin
+    writeln('Escriba el primer numero que desea sumar: ');
+    readln(num1);
+    writeln('Escriba el segundo numero que desea sumar: ');
+    readln(num2);
+    result := num1 + num2;
+    write('La suma resultante es de: ');
+    writeln(result);
+end;
+
+procedure resta;
+var
+    num1:real;
+    num2:real;
+    result:real;
+begin
+    writeln('Escriba el primer numero que desea restar: ');
+    readln(num1);
+    writeln('Escriba el segundo numero que desea restar: ');
+    readln(num2);
+    result := num1 - num2;
+    write('La resta resultante es de: ');
+    writeln(result);
+end;
+
+procedure mult;
+var
+    num1:real;
+    num2:real;
+    result:real;
+begin
+    writeln('Escriba el primer numero que desea multiplicar: ');
+    readln(num1);
+    writeln('Escriba el segundo numero que desea multiplicar: ');
+    readln(num2);
+    result := num1 * num2;
+    write('La multiplicacion resultante es de: ');
+    writeln(result);
+end;
+
+procedure divi;
+var
+    num1:real;
+    num2:real;
+    result:real;
+begin
+    writeln('Escriba el dividendo: ');
+    readln(num1);
+    writeln('Escriba el divisor: ');
+    readln(num2);
+    result := num1 / num2;
+    write('La division resultante es de: ');
+    writeln(result);
+end;
+
+procedure menu;
+var operacion:char;
+begin
+    writeln('Que operacion desea realizar (+,-,*,/): ');
+    readln(operacion);
+    
+    case operacion of
+        '+': suma;
+        '-': resta;
+        '*': mult;
+        '/': divi;
+    end;
+end;
+
+begin
+    menu;
+end.

@@ -1,0 +1,28 @@
+CHIP quiz {
+	IN a, b, c;
+	OUT y,z;
+	
+	PARTS:
+	Not(in=b,out=not1);
+	And(a=not1,b=c,out=and1);
+	Not(in=a,out=not2);
+	And(a=not2,b=b,out=and2);
+	Not(in=c,out=not3);
+	And(a=and2,b=not3,out=and3);
+	Or(a=and1,b=and3,out=or1);
+	And(a=a,b=c,out=and4);
+	Or(a=or1,b=and4,out=y);
+	
+	Not(in=a,out=not4);
+	Not(in=b,out=not5);
+	And(a=not4,b=not5,out=and5);
+	And(a=and5,b=c,out=and6);
+	Not(in=b,out=not6);
+	And(a=a,b=not6,out=and7);
+	Not(in=c,out=not7);
+	And(a=and7,b=not7,out=and8);
+	Or(a=and6,b=and8,out=or3);
+	And(a=a,b=b,out=and9);
+	And(a=and9,b=c,out=and10);
+	Or(a=or3,b=and10,out=z);
+}

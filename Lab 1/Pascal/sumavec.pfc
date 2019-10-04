@@ -1,0 +1,48 @@
+program sumavec;
+
+var
+    numeros: array[0..1000] of integer;
+    size: integer;
+    suma: real;
+    
+procedure leer;
+var
+    cant: integer;
+    i: integer;
+    number: integer;
+begin
+    writeln('Escriba la cantidad de elementos en el vector: ');
+    readln(cant);
+    size := cant;
+    for i:=0 to cant - 1 do
+    begin
+        write('Escriba el numero #');
+        write(i + 1);
+        writeln(': ');
+        readln(number);
+        numeros[i] := number;
+    end;
+end;
+
+procedure sumar;
+var i: integer;
+begin
+    suma := 0;
+    
+    for i:=0 to size -1 do
+    begin
+        suma := suma + numeros[i];
+    end;
+end;
+
+procedure escribir;
+begin
+    write('La suma de todos los elementos del vector es: ');
+    writeln(suma);
+end;
+    
+begin
+    leer;
+    sumar;
+    escribir;
+end.
