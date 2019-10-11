@@ -1,0 +1,78 @@
+     Assembly listing for: punto2.mas
+                Assembled: Thu Oct 10 09:01:24 COT 2019
+
+000 1012 |             LOAD a                
+001 3013 |             ADD b                 
+002 2016 |             STORE aux             
+003 202A |             STORE div_x           
+004 1017 |             LOAD dos              
+005 202B |             STORE div_y           
+006 0018 |             JNS div               
+007 2015 |             STORE sum             
+008 1014 |             LOAD c                
+009 202A |             STORE div_x           
+00A 1017 |             LOAD dos              
+00B 202B |             STORE div_y           
+00C 0018 |             JNS div               
+00D 2016 |             STORE aux             
+00E 1015 |             LOAD sum              
+00F 3016 |             ADD aux               
+010 6000 |             OUTPUT                
+011 7000 |             HALT                  
+         |                                  
+012 0040 |  a          DEC 64                
+013 0040 |  b          DEC 64                
+014 0080 |  c          DEC 128               
+015 0000 |  sum        DEC 0                 
+016 0000 |  aux        DEC 0                 
+017 0002 |  dos        DEC 2                 
+         |                                  
+         |                                  
+018 0000 |  div        DEC 0                 
+019 A000 |             CLEAR                 
+01A 202C |             STORE div_result      
+01B 102A |             LOAD div_x            
+01C 402B |  while      SUBT div_y            
+01D 8800 |             SKIPCOND 800          
+01E 9025 |             JUMP equals           
+01F 202A |  operation  STORE div_x           
+020 102C |             LOAD div_result       
+021 302D |             ADD div_one           
+022 202C |             STORE div_result      
+023 102A |             LOAD div_x            
+024 901C |             JUMP while            
+025 8400 |  equals     SKIPCOND 400          
+026 9028 |             JUMP endwhile         
+027 901F |             JUMP operation        
+028 102C |  endwhile   LOAD div_result       
+029 C018 |             JUMPI div             
+         |                                  			
+02A 0000 |  div_x      DEC 0                 
+02B 0000 |  div_y      DEC 0                 
+02C 0000 |  div_result DEC 0                 
+02D 0001 |  div_one    DEC 1                 
+
+Assembly successful.
+
+         SYMBOL TABLE
+         ------------------------------------------------------
+          Symbol     | Defined | References 
+         ------------+---------+-------------------------------
+          a          |   012   | 000
+          aux        |   016   | 002, 00D, 00F
+          b          |   013   | 001
+          c          |   014   | 008
+          div        |   018   | 006, 00C, 029
+          div_one    |   02D   | 021
+          div_result |   02C   | 01A, 020, 022, 028
+          div_x      |   02A   | 003, 009, 01B, 01F, 023
+          div_y      |   02B   | 005, 00B, 01C
+          dos        |   017   | 004, 00A
+          endwhile   |   028   | 026
+          equals     |   025   | 01E
+          operation  |   01F   | 027
+          sum        |   015   | 007, 00E
+          while      |   01C   | 024
+         ------------------------------------------------------
+
+

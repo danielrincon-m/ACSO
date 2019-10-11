@@ -1,0 +1,50 @@
+		load		a
+		add		b
+		store		aux
+		store		div_x
+		load		dos
+		store		div_y
+		jns		div
+		store		sum
+		load		c
+		store		div_x
+		load		dos
+		store		div_y
+		jns		div
+		store		aux
+		load		sum
+		add		aux
+		output
+		halt
+
+a,		dec		64
+b,		dec		64
+c,		dec		128
+sum,		dec		0
+aux,		dec		0
+dos,		dec		2
+
+
+div,		dec		0
+		clear
+		store		div_result
+		load		div_x
+while,		subt		div_y
+		skipcond	800
+		jump		equals
+operation,	store		div_x
+		load		div_result
+		add		div_one
+		store		div_result
+		load		div_x
+		jump		while
+equals,		skipcond	400
+		jump		endwhile
+		jump		operation
+endwhile,	load		div_result
+		jumpI		div
+			
+div_x,		dec		0
+div_y,		dec		0
+div_result,	dec		0
+div_one,	dec		1
