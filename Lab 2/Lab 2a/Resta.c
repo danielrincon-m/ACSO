@@ -19,24 +19,44 @@ void initialize(){
 
 void getInput(){
 	char input[SIZE];
-	int *nums[2] = {num1, num2};
 	int character;
 	int inputSize;
 	int j;
 	int i;
 	
-	for (j = 0; j < 2; j++){
-		inputSize = 0;
-		character = getchar();
-		while(character != '\n'){
-			input[inputSize] = character;
-			inputSize += 1;
-			character = getchar();
-		}
-		for (i = inputSize; i >= 0; i--){
-			nums[j][SIZE - (inputSize - i)] = (int)input[i] - 48;
+	for(i = 0; i < SIZE; i++){
+		input[i] = -1;
+	}
+	scanf("%s", input);
+	for(i = 0; i < SIZE; i++){
+		if(input[i] == -1){
+			inputSize = i - 1;
+			break;
 		}
 	}
+	for (i = inputSize; i >= 0; i--){
+		num1[SIZE - (inputSize - i)] = (int)input[i] - 48;
+	}
+//	for(i = 0; i < SIZE; i++){
+//		printf("%d", num1[i]);
+//	}
+	
+	for(i = 0; i < SIZE; i++){
+		input[i] = -1;
+	}
+	scanf("%s", input);
+	for(i = 0; i < SIZE; i++){
+		if(input[i] == -1){
+			inputSize = i - 1;
+			break;
+		}
+	}
+	for (i = inputSize; i >= 0; i--){
+		num2[SIZE - (inputSize - i)] = (int)input[i] - 48;
+	}
+//	for(i = 0; i < SIZE; i++){
+//		printf("%d", num2[i]);
+//	}
 }
 
 
@@ -68,18 +88,17 @@ void printOutput(){
 		}
 	}
 	for (i = firstIndex; i < SIZE; i++){
-		printf("%c",solucion[i] + 48);
+		printf("%d",solucion[i]);
 	}
 	printf("\n");
 }
 
 
 int main(){
-	char trash;
 	int cases;
 	int i;
 	
-	scanf("%d%c", &cases, &trash);
+	scanf("%d", &cases);
 	for (i = 0; i < cases; i++){
 		initialize();
 		getInput();
