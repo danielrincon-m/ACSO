@@ -1,0 +1,19 @@
+ ---------------------
+ Symbol     | Location
+ -----------+---------
+ a          |   01D
+ aux        |   021
+ b          |   01E
+ c          |   01F
+ div        |   023
+ div_one    |   038
+ div_result |   037
+ div_x      |   035
+ div_y      |   036
+ dos        |   022
+ endwhile   |   033
+ equals     |   030
+ operation  |   02A
+ while      |   027
+ z          |   020
+

@@ -1,0 +1,88 @@
+     Assembly listing for: p6.mas
+                Assembled: Thu Oct 24 09:28:13 COT 2019
+
+000 101D |             LOAD a                
+001 2035 |             STORE div_x           
+002 1022 |             LOAD dos              
+003 2036 |             STORE div_y           
+004 0023 |             JNS div               
+005 2021 |             STORE aux             
+006 1020 |             LOAD z                
+007 3021 |             ADD aux               
+008 2020 |             STORE z               
+009 101E |             LOAD b                
+00A 2035 |             STORE div_x           
+00B 1022 |             LOAD dos              
+00C 2036 |             STORE div_y           
+00D 0023 |             JNS div               
+00E 2021 |             STORE aux             
+00F 1020 |             LOAD z                
+010 3021 |             ADD aux               
+011 2020 |             STORE z               
+012 101F |             LOAD c                
+013 2035 |             STORE div_x           
+014 1022 |             LOAD dos              
+015 2036 |             STORE div_y           
+016 0023 |             JNS div               
+017 2021 |             STORE aux             
+018 1020 |             LOAD z                
+019 3021 |             ADD aux               
+01A 2020 |             STORE z               
+01B 6000 |             OUTPUT                
+01C 7000 |             HALT                  
+01D 0002 |  a          DEC 2                 
+01E 0002 |  b          DEC 2                 
+01F 0002 |  c          DEC 2                 
+020 0000 |  z          DEC 0                 
+021 0000 |  aux        DEC 0                 
+022 0002 |  dos        DEC 2                 
+         |                                  			  
+         |                                  
+023 0000 |  div        DEC 0                 
+024 A000 |             CLEAR                 
+025 2037 |             STORE div_result      
+026 1035 |             LOAD div_x            
+027 4036 |  while      SUBT div_y            
+028 8800 |             SKIPCOND 800          
+029 9030 |             JUMP equals           
+02A 2035 |  operation  STORE div_x           
+02B 1037 |             LOAD div_result       
+02C 3038 |             ADD div_one           
+02D 2037 |             STORE div_result      
+02E 1035 |             LOAD div_x            
+02F 9027 |             JUMP while            
+030 8400 |  equals     SKIPCOND 400          
+031 9033 |             JUMP endwhile         
+032 902A |             JUMP operation        
+033 1037 |  endwhile   LOAD div_result       
+034 C023 |             JUMPI div             
+         |                                  			
+035 0000 |  div_x      DEC 0                 
+036 0000 |  div_y      DEC 0                 
+037 0000 |  div_result DEC 0                 
+038 0001 |  div_one    DEC 1                 
+
+Assembly successful.
+
+         SYMBOL TABLE
+         ------------------------------------------------------
+          Symbol     | Defined | References 
+         ------------+---------+-------------------------------
+          a          |   01D   | 000
+          aux        |   021   | 005, 007, 00E, 010, 017, 019
+          b          |   01E   | 009
+          c          |   01F   | 012
+          div        |   023   | 004, 00D, 016, 034
+          div_one    |   038   | 02C
+          div_result |   037   | 025, 02B, 02D, 033
+          div_x      |   035   | 001, 00A, 013, 026, 02A, 02E
+          div_y      |   036   | 003, 00C, 015, 027
+          dos        |   022   | 002, 00B, 014
+          endwhile   |   033   | 031
+          equals     |   030   | 029
+          operation  |   02A   | 032
+          while      |   027   | 02F
+          z          |   020   | 006, 008, 00F, 011, 018, 01A
+         ------------------------------------------------------
+
+

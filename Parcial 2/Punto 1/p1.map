@@ -1,0 +1,18 @@
+ -------------------
+ Symbol   | Location
+ ---------+---------
+ a        |   00E
+ b        |   00F
+ c        |   010
+ dos      |   013
+ endwhile |   022
+ mult     |   014
+ mult_i   |   026
+ mult_one |   028
+ mult_sum |   027
+ mult_x   |   024
+ mult_y   |   025
+ tres     |   012
+ while    |   018
+ z        |   011
+

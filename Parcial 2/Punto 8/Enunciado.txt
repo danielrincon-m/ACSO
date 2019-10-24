@@ -1,0 +1,32 @@
+Dado el fragmento de codigo 
+
+Org 100
+Clear
+Add B
+Store A
+JnS Rutina
+Halt
+N, Dec 5
+C1, Dec 10
+C2, Dec 15
+C3, Dec 20
+C4, Dec 25
+C5, Dec 30
+A, Dec 35
+B, Hex 106
+Rutina, Clear
+Store S
+Load A
+Ciclo, Sub N
+Skipcond 800
+Jump Fin
+Load S
+AddI A
+Store S
+Load A
+Add D
+Store A
+Jump Ciclo
+Fin, JmpI Rutina
+S, Dec 40
+D, Dec 1

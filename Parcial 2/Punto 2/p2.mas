@@ -1,0 +1,15 @@
+              load          diez
+              store         x
+while,     skipcond  800
+              jump         equals
+              jump         oper
+equals,  skipcond  400
+              jump         end
+              jump         oper
+oper,      subt          one
+              store          x
+              jump          while
+end,       halt
+diez,      dec            10
+one,      dec             1
+x,          dec             0

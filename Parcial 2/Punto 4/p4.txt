@@ -1,0 +1,9 @@
+Usando circuitos builtin del Simulador de Hardware, construya una ALU que recibe dos entradas de un bit (A y B) , una entrada de control (C) de un bit y dos bits de salida (Y, Z).
+
+De acuerdo al valor de C debe realizar las siguientes operaciones
+
+C = 0, Z = A + B. Si hay carry Y = 1, de lo contrario Y = 0
+
+C = 1,  Z =  A ? B, Y = A > B,  donde  ? es la implicación lógica
+
+Como respuesta copie el texto del HDL

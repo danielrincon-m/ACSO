@@ -1,0 +1,71 @@
+     Assembly listing for: p1.mas
+                Assembled: Thu Oct 24 09:50:41 COT 2019
+
+000 1012 |           LOAD tres           
+001 2024 |           STORE mult_x        
+002 100F |           LOAD b              
+003 4010 |           SUBT c              
+004 2025 |           STORE mult_y        
+005 0014 |           JNS mult            
+006 300E |           ADD a               
+007 2025 |           STORE mult_y        
+008 1013 |           LOAD dos            
+009 2024 |           STORE mult_x        
+00A 0014 |           JNS mult            
+00B 2011 |           STORE z             
+00C 6000 |           OUTPUT              
+00D 7000 |           HALT                
+00E 0002 |  a        DEC 2               
+00F 0002 |  b        DEC 2               
+010 0000 |  c        DEC 0               
+011 0000 |  z        DEC 0               
+012 0003 |  tres     DEC 3               
+013 0002 |  dos      DEC 2               
+         |                              		
+         |                              			
+         |                              
+014 0000 |  mult     DEC 0               
+015 A000 |           CLEAR               
+016 2027 |           STORE mult_sum      
+017 2026 |           STORE mult_i        
+018 4025 |  while    SUBT mult_y         
+019 8000 |           SKIPCOND 000        
+01A 9022 |           JUMP endwhile       
+01B 1027 |           LOAD mult_sum       
+01C 3024 |           ADD mult_x          
+01D 2027 |           STORE mult_sum      
+01E 1026 |           LOAD mult_i         
+01F 3028 |           ADD mult_one        
+020 2026 |           STORE mult_i        
+021 9018 |           JUMP while          
+022 1027 |  endwhile LOAD mult_sum       
+023 C014 |           JUMPI mult          
+024 0000 |  mult_x   DEC 0               
+025 0000 |  mult_y   DEC 0               
+026 0000 |  mult_i   DEC 0               
+027 0000 |  mult_sum DEC 0               
+028 0001 |  mult_one DEC 1               
+
+Assembly successful.
+
+         SYMBOL TABLE
+         ----------------------------------------------------
+          Symbol   | Defined | References 
+         ----------+---------+-------------------------------
+          a        |   00E   | 006
+          b        |   00F   | 002
+          c        |   010   | 003
+          dos      |   013   | 008
+          endwhile |   022   | 01A
+          mult     |   014   | 005, 00A, 023
+          mult_i   |   026   | 017, 01E, 020
+          mult_one |   028   | 01F
+          mult_sum |   027   | 016, 01B, 01D, 022
+          mult_x   |   024   | 001, 009, 01C
+          mult_y   |   025   | 004, 007, 018
+          tres     |   012   | 000
+          while    |   018   | 021
+          z        |   011   | 00B
+         ----------------------------------------------------
+
+

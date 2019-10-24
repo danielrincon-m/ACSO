@@ -1,0 +1,60 @@
+              load        a
+			  store       div_x
+			  load        dos
+			  store       div_y
+			  jns         div
+			  store       aux
+			  load        z
+			  add         aux
+			  store       z
+			  load        b
+			  store       div_x
+			  load        dos
+			  store       div_y
+			  jns         div
+			  store       aux
+			  load        z
+			  add         aux
+			  store       z
+			  load        c
+			  store       div_x
+			  load        dos
+			  store       div_y
+			  jns         div
+			  store       aux
+			  load        z
+			  add         aux
+			  store       z
+			  output
+              halt
+a,            dec         2
+b,            dec         2
+c,            dec         2
+z,            dec         0
+aux,          dec         0
+dos,          dec         2
+			  
+
+div,          dec         0
+              clear
+		      store       div_result
+              load        div_x
+while,        subt        div_y
+              skipcond    800
+              jump        equals
+operation,    store       div_x
+              load        div_result
+              add         div_one
+              store       div_result
+              load        div_x
+              jump        while
+equals,       skipcond    400
+              jump        endwhile
+              jump        operation
+endwhile,     load        div_result
+              jumpI       div
+			
+div_x,        dec         0
+div_y,        dec         0
+div_result,   dec         0
+div_one,      dec         1

@@ -1,0 +1,35 @@
+     Assembly listing for: p2.mas
+                Assembled: Thu Oct 24 09:31:58 COT 2019
+
+000 100C |         LOAD diez         
+001 200E |         STORE x           
+002 8800 |  while  SKIPCOND 800      
+003 9005 |         JUMP equals       
+004 9008 |         JUMP oper         
+005 8400 |  equals SKIPCOND 400      
+006 900B |         JUMP end          
+007 9008 |         JUMP oper         
+008 400D |  oper   SUBT one          
+009 200E |         STORE x           
+00A 9002 |         JUMP while        
+00B 7000 |  end    HALT              
+00C 000A |  diez   DEC 10            
+00D 0001 |  one    DEC 1             
+00E 0000 |  x      DEC 0             
+
+Assembly successful.
+
+         SYMBOL TABLE
+         --------------------------------------------------
+          Symbol | Defined | References 
+         --------+---------+-------------------------------
+          diez   |   00C   | 000
+          end    |   00B   | 006
+          equals |   005   | 003
+          one    |   00D   | 008
+          oper   |   008   | 004, 007
+          while  |   002   | 00A
+          x      |   00E   | 001, 009
+         --------------------------------------------------
+
+

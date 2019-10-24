@@ -1,0 +1,34 @@
+     Assembly listing for: p10.mas
+                Assembled: Thu Oct 24 09:44:47 COT 2019
+
+000 100C |         LOAD x            
+001 400E |         SUBT one          
+002 8400 |         SKIPCOND 400      
+003 900B |         JUMP end          
+004 100C |         LOAD x            
+005 400F |         SUBT diez         
+006 8000 |         SKIPCOND 000      
+007 900B |         JUMP end          
+008 100C |         LOAD x            
+009 300C |         ADD x             
+00A 200D |         STORE y           
+00B 7000 |  end    HALT              
+00C 0002 |  x      DEC 2             
+00D 0000 |  y      DEC 0             
+00E 0001 |  one    DEC 1             
+00F 000A |  diez   DEC 10            
+
+Assembly successful.
+
+         SYMBOL TABLE
+         --------------------------------------------------
+          Symbol | Defined | References 
+         --------+---------+-------------------------------
+          diez   |   00F   | 005
+          end    |   00B   | 003, 007
+          one    |   00E   | 001
+          x      |   00C   | 000, 004, 008, 009
+          y      |   00D   | 00A
+         --------------------------------------------------
+
+

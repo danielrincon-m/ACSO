@@ -1,0 +1,44 @@
+            load    tres
+			store   mult_x
+			load    b
+			subt    c
+			store   mult_y
+			jns     mult
+			add     a
+			store   mult_y
+			load    dos
+			store   mult_x
+			jns     mult
+			store   z
+			output
+			halt
+a,          dec     2
+b,          dec     2
+c,          dec     0
+z,          dec     0
+tres,       dec     3
+dos,        dec     2
+		
+			
+
+mult,		dec 	0
+			clear
+			store  	mult_sum
+			store	mult_i
+while,		subt	mult_y
+			skipcond 000
+			jump	endwhile
+			load	mult_sum
+			add		mult_x
+			store 	mult_sum
+			load	mult_i
+			add		mult_one
+			store	mult_i
+			jump	while
+endwhile,	load	mult_sum
+			jumpi	mult
+mult_x,		dec		0
+mult_y,		dec		0
+mult_i,		dec		0
+mult_sum,	dec		0
+mult_one,	dec		1

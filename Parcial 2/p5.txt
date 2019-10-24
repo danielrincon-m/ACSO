@@ -1,0 +1,1 @@
+Dado el circuito digital, implementelo en el Simulador de Hardware usando circuitos "builtin". Como respuesta copie el codigo HDL

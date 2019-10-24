@@ -1,0 +1,28 @@
+CHIP p4 {
+	IN A, B, C;
+	OUT Y, Z;
+	
+	PARTS:
+	Not(in=B, out=not1);
+	Not(in=B, out=not2);
+	
+	And(a=A, b=not1, out=and1);
+	And(a=A, b=B, out=and2);
+	Not(in=C, out=not3);
+	Not(in=A, out=not4);
+	Not(in=A, out=not5);
+	And(a=A, b=not2, out=and3);
+	Not(in=C, out=not6);
+	
+	And(a=and1, b=C, out=and4);
+	And(a=and2, b=not3, out=and5);
+	And(a=not4, b=C, out=and6);
+	And(a=not5, b=B, out=and7);
+	And(a=B, b=C, out=and8);
+	And(a=and3, b=not6, out=and9);
+	
+	Or(a=and4, b=and5, out=Y);
+	Or(a=and6, b=and7, out=or1);
+	Or(a=and8, b=and9, out=or2);
+	Or(a=or1, b=or2, out=Z);
+}

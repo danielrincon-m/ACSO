@@ -1,0 +1,56 @@
+     Assembly listing for: p8.mas
+                Assembled: Thu Oct 24 09:38:20 COT 2019
+
+         |         ORG 100           
+100 A000 |         CLEAR             
+101 310C |         ADD B             
+102 210B |         STORE A           
+103 010D |         JNS Rutina        
+104 7000 |         HALT              
+105 0005 |  N      DEC 5             
+106 000A |  C1     DEC 10            
+107 000F |  C2     DEC 15            
+108 0014 |  C3     DEC 20            
+109 0019 |  C4     DEC 25            
+10A 001E |  C5     DEC 30            
+10B 0023 |  A      DEC 35            
+10C 0106 |  B      HEX 106           
+10D A000 |  Rutina CLEAR             
+10E 211B |         STORE S           
+10F 110B |         LOAD A            
+110 4105 |  Ciclo  SUBT N            
+111 8800 |         SKIPCOND 800      
+112 911A |         JUMP Fin          
+113 111B |         LOAD S            
+114 B10B |         ADDI A            
+115 211B |         STORE S           
+116 110B |         LOAD A            
+117 311C |         ADD D             
+118 210B |         STORE A           
+119 9110 |         JUMP Ciclo        
+11A C10D |  Fin    JUMPI Rutina      
+11B 0028 |  S      DEC 40            
+11C 0001 |  D      DEC 1             
+
+Assembly successful.
+
+         SYMBOL TABLE
+         --------------------------------------------------
+          Symbol | Defined | References 
+         --------+---------+-------------------------------
+          A      |   10B   | 102, 10F, 114, 116, 118
+          B      |   10C   | 101
+          C1     |   106   | 
+          C2     |   107   | 
+          C3     |   108   | 
+          C4     |   109   | 
+          C5     |   10A   | 
+          Ciclo  |   110   | 119
+          D      |   11C   | 117
+          Fin    |   11A   | 112
+          N      |   105   | 110
+          Rutina |   10D   | 103, 11A
+          S      |   11B   | 10E, 113, 115
+         --------------------------------------------------
+
+

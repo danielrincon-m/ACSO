@@ -1,0 +1,7 @@
+Escriba en lenguaje ensamblador de Marie el codigo equivalente al fragmento de codigo 
+
+if X = 1 then
+  if X < 10 then
+    Y := X + X
+  endif
+endif

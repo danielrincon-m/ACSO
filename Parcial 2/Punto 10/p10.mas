@@ -1,0 +1,16 @@
+          load       x
+		  subt       one
+		  skipcond   400
+		  jump       end
+		  load       x
+		  subt       diez
+		  skipcond   000
+		  jump       end
+		  load       x
+		  add        x
+		  store      y
+end,      halt
+x,        dec        1
+y,        dec        0
+one,      dec        1
+diez,     dec        10

@@ -1,0 +1,1 @@
+Escriba en lenguaje ensamblador de MARIE un programa que evalue la expresion Z=(A/2)+(B/2)+(C/2). Implemente y utilice la funcion div(X,Y) que retorna en el acumulador la división entera de dos numeros positivos X e Y

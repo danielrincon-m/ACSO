@@ -1,0 +1,11 @@
+ -----------------
+ Symbol | Location
+ -------+---------
+ diez   |   00C
+ end    |   00B
+ equals |   005
+ one    |   00D
+ oper   |   008
+ while  |   002
+ x      |   00E
+
