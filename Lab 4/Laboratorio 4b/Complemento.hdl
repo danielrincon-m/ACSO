@@ -1,4 +1,4 @@
-CHIP Compl2 {
+CHIP Complemento {
 	IN ah[16], al[16];
 	OUT sh[16], sl[16];
 	

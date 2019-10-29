@@ -1,5 +1,5 @@
 size = 16
-print('Compl2(ah=bh, al=bl, ', end='')
+print('Complemento(ah=bh, al=bl, ', end='')
 for i in range(size):
     print('sh[' + str(i) + ']=bch' + str(i) + ', ', end='')
 for i in range(size):
@@ -11,11 +11,11 @@ print()
 nCarry = 1
 for i in range(size):
     if i == 0:
-        print('FullAdder(a=ah[' + str(i) + '], b=bch' + str(i) + ', c=false, sum=sh[' + str(i) + '], carry=c' + str(nCarry + 1) + ');')
+        print('FullAdder(a=al[' + str(i) + '], b=bcl' + str(i) + ', c=false, sum=sl[' + str(i) + '], carry=c' + str(nCarry + 1) + ');')
     else:
-        print('FullAdder(a=ah[' + str(i) + '], b=bch' + str(i) + ', c=c' + str(nCarry) + ', sum=sh[' + str(i) + '], carry=c' + str(nCarry + 1) + ');')
+        print('FullAdder(a=al[' + str(i) + '], b=bcl' + str(i) + ', c=c' + str(nCarry) + ', sum=sl[' + str(i) + '], carry=c' + str(nCarry + 1) + ');')
     nCarry += 1
 print()
 for i in range(size):
-    print('FullAdder(a=al[' + str(i) + '], b=bcl' + str(i) + ', c=c' + str(nCarry) + ', sum=sl[' + str(i) + '], carry=c' + str(nCarry + 1) + ');')
+    print('FullAdder(a=ah[' + str(i) + '], b=bch' + str(i) + ', c=c' + str(nCarry) + ', sum=sh[' + str(i) + '], carry=c' + str(nCarry + 1) + ');')
     nCarry += 1

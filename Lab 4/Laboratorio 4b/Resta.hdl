@@ -1,45 +1,41 @@
 CHIP Resta {
-	IN al[16], ah[16], bl[16], bh[16];
-	OUT sl[16], sh[16];
+	IN ah[16], al[16], bh[16], bl[16];
+	OUT sh[16], sl[16];
 	
 	PARTS:
-	Compl2(ah=bh, al=bl, 
-		   sh[0]=bch0, sh[1]=bch1, sh[2]=bch2, sh[3]=bch3, sh[4]=bch4, sh[5]=bch5, sh[6]=bch6, sh[7]=bch7, 
-		   sh[8]=bch8, sh[9]=bch9, sh[10]=bch10, sh[11]=bch11, sh[12]=bch12, sh[13]=bch13, sh[14]=bch14, sh[15]=bch15, 
-		   sl[0]=bcl0, sl[1]=bcl1, sl[2]=bcl2, sl[3]=bcl3, sl[4]=bcl4, sl[5]=bcl5, sl[6]=bcl6, sl[7]=bcl7, 
-		   sl[8]=bcl8, sl[9]=bcl9, sl[10]=bcl10, sl[11]=bcl11, sl[12]=bcl12, sl[13]=bcl13, sl[14]=bcl14, sl[15]=bcl15);
+	Complemento(ah=bh, al=bl, sh[0]=bch0, sh[1]=bch1, sh[2]=bch2, sh[3]=bch3, sh[4]=bch4, sh[5]=bch5, sh[6]=bch6, sh[7]=bch7, sh[8]=bch8, sh[9]=bch9, sh[10]=bch10, sh[11]=bch11, sh[12]=bch12, sh[13]=bch13, sh[14]=bch14, sh[15]=bch15, sl[0]=bcl0, sl[1]=bcl1, sl[2]=bcl2, sl[3]=bcl3, sl[4]=bcl4, sl[5]=bcl5, sl[6]=bcl6, sl[7]=bcl7, sl[8]=bcl8, sl[9]=bcl9, sl[10]=bcl10, sl[11]=bcl11, sl[12]=bcl12, sl[13]=bcl13, sl[14]=bcl14, sl[15]=bcl15);
 
-	FullAdder(a=ah[0], b=bch0, c=false, sum=sh[0], carry=c2);
-	FullAdder(a=ah[1], b=bch1, c=c2, sum=sh[1], carry=c3);
-	FullAdder(a=ah[2], b=bch2, c=c3, sum=sh[2], carry=c4);
-	FullAdder(a=ah[3], b=bch3, c=c4, sum=sh[3], carry=c5);
-	FullAdder(a=ah[4], b=bch4, c=c5, sum=sh[4], carry=c6);
-	FullAdder(a=ah[5], b=bch5, c=c6, sum=sh[5], carry=c7);
-	FullAdder(a=ah[6], b=bch6, c=c7, sum=sh[6], carry=c8);
-	FullAdder(a=ah[7], b=bch7, c=c8, sum=sh[7], carry=c9);
-	FullAdder(a=ah[8], b=bch8, c=c9, sum=sh[8], carry=c10);
-	FullAdder(a=ah[9], b=bch9, c=c10, sum=sh[9], carry=c11);
-	FullAdder(a=ah[10], b=bch10, c=c11, sum=sh[10], carry=c12);
-	FullAdder(a=ah[11], b=bch11, c=c12, sum=sh[11], carry=c13);
-	FullAdder(a=ah[12], b=bch12, c=c13, sum=sh[12], carry=c14);
-	FullAdder(a=ah[13], b=bch13, c=c14, sum=sh[13], carry=c15);
-	FullAdder(a=ah[14], b=bch14, c=c15, sum=sh[14], carry=c16);
-	FullAdder(a=ah[15], b=bch15, c=c16, sum=sh[15], carry=c17);
+	FullAdder(a=al[0], b=bcl0, c=false, sum=sl[0], carry=c2);
+	FullAdder(a=al[1], b=bcl1, c=c2, sum=sl[1], carry=c3);
+	FullAdder(a=al[2], b=bcl2, c=c3, sum=sl[2], carry=c4);
+	FullAdder(a=al[3], b=bcl3, c=c4, sum=sl[3], carry=c5);
+	FullAdder(a=al[4], b=bcl4, c=c5, sum=sl[4], carry=c6);
+	FullAdder(a=al[5], b=bcl5, c=c6, sum=sl[5], carry=c7);
+	FullAdder(a=al[6], b=bcl6, c=c7, sum=sl[6], carry=c8);
+	FullAdder(a=al[7], b=bcl7, c=c8, sum=sl[7], carry=c9);
+	FullAdder(a=al[8], b=bcl8, c=c9, sum=sl[8], carry=c10);
+	FullAdder(a=al[9], b=bcl9, c=c10, sum=sl[9], carry=c11);
+	FullAdder(a=al[10], b=bcl10, c=c11, sum=sl[10], carry=c12);
+	FullAdder(a=al[11], b=bcl11, c=c12, sum=sl[11], carry=c13);
+	FullAdder(a=al[12], b=bcl12, c=c13, sum=sl[12], carry=c14);
+	FullAdder(a=al[13], b=bcl13, c=c14, sum=sl[13], carry=c15);
+	FullAdder(a=al[14], b=bcl14, c=c15, sum=sl[14], carry=c16);
+	FullAdder(a=al[15], b=bcl15, c=c16, sum=sl[15], carry=c17);
 
-	FullAdder(a=al[0], b=bcl0, c=c17, sum=sl[0], carry=c18);
-	FullAdder(a=al[1], b=bcl1, c=c18, sum=sl[1], carry=c19);
-	FullAdder(a=al[2], b=bcl2, c=c19, sum=sl[2], carry=c20);
-	FullAdder(a=al[3], b=bcl3, c=c20, sum=sl[3], carry=c21);
-	FullAdder(a=al[4], b=bcl4, c=c21, sum=sl[4], carry=c22);
-	FullAdder(a=al[5], b=bcl5, c=c22, sum=sl[5], carry=c23);
-	FullAdder(a=al[6], b=bcl6, c=c23, sum=sl[6], carry=c24);
-	FullAdder(a=al[7], b=bcl7, c=c24, sum=sl[7], carry=c25);
-	FullAdder(a=al[8], b=bcl8, c=c25, sum=sl[8], carry=c26);
-	FullAdder(a=al[9], b=bcl9, c=c26, sum=sl[9], carry=c27);
-	FullAdder(a=al[10], b=bcl10, c=c27, sum=sl[10], carry=c28);
-	FullAdder(a=al[11], b=bcl11, c=c28, sum=sl[11], carry=c29);
-	FullAdder(a=al[12], b=bcl12, c=c29, sum=sl[12], carry=c30);
-	FullAdder(a=al[13], b=bcl13, c=c30, sum=sl[13], carry=c31);
-	FullAdder(a=al[14], b=bcl14, c=c31, sum=sl[14], carry=c32);
-	FullAdder(a=al[15], b=bcl15, c=c32, sum=sl[15], carry=c33);
+	FullAdder(a=ah[0], b=bch0, c=c17, sum=sh[0], carry=c18);
+	FullAdder(a=ah[1], b=bch1, c=c18, sum=sh[1], carry=c19);
+	FullAdder(a=ah[2], b=bch2, c=c19, sum=sh[2], carry=c20);
+	FullAdder(a=ah[3], b=bch3, c=c20, sum=sh[3], carry=c21);
+	FullAdder(a=ah[4], b=bch4, c=c21, sum=sh[4], carry=c22);
+	FullAdder(a=ah[5], b=bch5, c=c22, sum=sh[5], carry=c23);
+	FullAdder(a=ah[6], b=bch6, c=c23, sum=sh[6], carry=c24);
+	FullAdder(a=ah[7], b=bch7, c=c24, sum=sh[7], carry=c25);
+	FullAdder(a=ah[8], b=bch8, c=c25, sum=sh[8], carry=c26);
+	FullAdder(a=ah[9], b=bch9, c=c26, sum=sh[9], carry=c27);
+	FullAdder(a=ah[10], b=bch10, c=c27, sum=sh[10], carry=c28);
+	FullAdder(a=ah[11], b=bch11, c=c28, sum=sh[11], carry=c29);
+	FullAdder(a=ah[12], b=bch12, c=c29, sum=sh[12], carry=c30);
+	FullAdder(a=ah[13], b=bch13, c=c30, sum=sh[13], carry=c31);
+	FullAdder(a=ah[14], b=bch14, c=c31, sum=sh[14], carry=c32);
+	FullAdder(a=ah[15], b=bch15, c=c32, sum=sh[15], carry=c33);
 }
