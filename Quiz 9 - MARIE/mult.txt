@@ -1,21 +1,22 @@
-mult,		dec 	0
+mult,		dec 	    0
 			clear
-			store	mult_sum
-			store	mult_i
-while,		subt	mult_y
-			skipcond000
-			jump	endwhile
-			load	mult_sum
-			add		mult_x
-			store 	mult_sum
-			load	mult_i
-			add		mult_one
-			store	mult_i
-			jump	while
-endwhile,	load	mult_sum
-			jumpi	mult
-mult_x,		dec		0
-mult_y,		dec		0
-mult_i,		dec		0
-mult_sum,	dec		0
-mult_one,	dec		1
+			store   	mult_sum
+			store	    mult_i
+while,		subt	    mult_y
+			skipcond    000
+			jump	    endwhile
+			load    	mult_sum
+			add		    mult_x
+			store    	mult_sum
+			load    	mult_i
+			add	    	mult_one
+			store   	mult_i
+			jump    	while
+endwhile,	load    	mult_sum
+			jumpi   	mult
+            
+mult_x,		dec	    	0
+mult_y,		dec	    	0
+mult_i,		dec	    	0
+mult_sum,	dec	    	0
+mult_one,	dec	    	1

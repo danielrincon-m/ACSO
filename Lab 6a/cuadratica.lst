@@ -1,0 +1,375 @@
+     Assembly listing for: cuadratica.mas
+                Assembled: Sat Nov 16 21:30:20 COT 2019
+
+000 5000 |             INPUT                 
+001 204C |             STORE a               
+002 5000 |             INPUT                 
+003 204D |             STORE b               
+004 5000 |             INPUT                 
+005 204E |             STORE c               
+         |                                  
+006 A000 |             CLEAR                /Calcular -b
+007 404D |             SUBT b                
+008 2050 |             STORE b_neg           
+         |                                  
+009 104D |             LOAD b               /Calcular b cuadrado
+00A 20B1 |             STORE mult_x          
+00B 20B2 |             STORE mult_y          
+00C 007E |             JNS mult              
+00D 204F |             STORE bsq             
+         |                                  
+00E 1056 |             LOAD four            /Calcular 4*a*c
+00F 20B1 |             STORE mult_x          
+010 104C |             LOAD a                
+011 20B2 |             STORE mult_y          
+012 007E |             JNS mult              
+013 20B1 |             STORE mult_x          
+014 104E |             LOAD c                
+015 20B2 |             STORE mult_y          
+016 007E |             JNS mult              
+017 2051 |             STORE disc            
+         |                                              
+018 104F |             LOAD bsq             /Calcular discriminante
+019 4051 |             SUBT disc             
+01A 2051 |             STORE disc            
+01B 20EC |             STORE div_x           
+01C 1057 |             LOAD ten              
+01D 20ED |             STORE div_y           
+01E 00B8 |             JNS div               
+01F 2051 |             STORE disc            
+         |                                  
+020 1055 |             LOAD two             /Calcular 2*a
+021 20B1 |             STORE mult_x          
+022 104C |             LOAD a                
+023 20B2 |             STORE mult_y          
+024 007E |             JNS mult              
+025 2053 |             STORE twoa            
+         |                                  
+026 1051 |             LOAD disc            /Verificar si el discriminante es negativo
+027 8000 |             SKIPCOND 000          
+028 902B |             JUMP checkzero        
+029 1054 |             LOAD one_neg          
+02A 904A |             JUMP out              
+         |                                  
+02B 8400 |  checkzero  SKIPCOND 400         /Verificar si el discriminante es cero
+02C 9030 |             JUMP calcsqrt         
+02D A000 |             CLEAR                 
+02E 2052 |             STORE sqrtdisc        
+02F 903E |             JUMP partTwo          
+         |                                  
+030 207D |  calcsqrt   STORE sq_x           /Calcular la raiz del discriminante
+031 0058 |             JNS sqroot            
+032 2052 |             STORE sqrtdisc        
+         |                                              
+033 1050 |             LOAD b_neg           /calcular la parte de suma
+034 3052 |             ADD sqrtdisc          
+035 20B1 |             STORE mult_x          
+036 1057 |             LOAD ten              
+037 20B2 |             STORE mult_y          
+038 007E |             JNS mult              
+039 20EC |             STORE div_x           
+03A 1053 |             LOAD twoa             
+03B 20ED |             STORE div_y           
+03C 00B8 |             JNS div               
+03D 6000 |             OUTPUT                
+         |                                  
+03E 1050 |  partTwo    LOAD b_neg           /calcular la parte de resta
+03F 4052 |             SUBT sqrtdisc         
+040 20B1 |             STORE mult_x          
+041 1057 |             LOAD ten              
+042 20B2 |             STORE mult_y          
+043 007E |             JNS mult              
+044 20EC |             STORE div_x           
+045 1053 |             LOAD twoa             
+046 20ED |             STORE div_y           
+047 00B8 |             JNS div               
+048 6000 |             OUTPUT                
+049 904B |             JUMP end              
+         |                                  
+04A 6000 |  out        OUTPUT                
+04B 7000 |  end        HALT                  
+         |                                  
+04C 0000 |  a          DEC 0                 
+04D 0000 |  b          DEC 0                 
+04E 0000 |  c          DEC 0                 
+         |                                  
+04F 0000 |  bsq        DEC 0                 
+050 0000 |  b_neg      DEC 0                 
+051 0000 |  disc       DEC 0                 
+052 0000 |  sqrtdisc   DEC 0                 
+053 0000 |  twoa       DEC 0                 
+         |                                  
+054 FFFF |  one_neg    DEC -1                
+055 0002 |  two        DEC 2                 
+056 0004 |  four       DEC 4                 
+057 000A |  ten        DEC 10                
+         |                                  
+         |                                  
+         |                                  
+058 0000 |  sqroot     DEC 0                 
+059 107D |             LOAD sq_x             
+05A 20B1 |             STORE mult_x          
+05B 107C |             LOAD sq_ten           
+05C 20B2 |             STORE mult_y          
+05D 007E |             JNS mult              
+05E 207D |             STORE sq_x            
+05F 8400 |             SKIPCOND 400          
+060 9062 |             JUMP sq_eqone         
+061 C058 |             JUMPI sqroot          
+062 407C |  sq_eqone   SUBT sq_ten           
+063 8400 |             SKIPCOND 400          
+064 9067 |             JUMP sq_gen           
+065 107D |             LOAD sq_x             
+066 C058 |             JUMPI sqroot          
+067 107B |  sq_gen     LOAD sq_result        
+068 407D |             SUBT sq_x             
+069 8000 |             SKIPCOND 000          
+06A 906C |             JUMP sq_eqwh          
+06B 906E |             JUMP sq_wh            
+06C 8400 |  sq_eqwh    SKIPCOND 400          
+06D 9076 |             JUMP sq_endwh         
+06E 107A |  sq_wh      LOAD sq_i             
+06F 3079 |             ADD sq_one            
+070 207A |             STORE sq_i            
+071 20B1 |             STORE mult_x          
+072 20B2 |             STORE mult_y          
+073 007E |             JNS mult              
+074 207B |             STORE sq_result       
+075 9067 |             JUMP sq_gen           
+076 107A |  sq_endwh   LOAD sq_i             
+077 4079 |             SUBT sq_one           
+078 C058 |             JUMPI sqroot          
+         |                                  
+079 0001 |  sq_one     DEC 1                 
+07A 0001 |  sq_i       DEC 1                 
+07B 0001 |  sq_result  DEC 1                 
+07C 000A |  sq_ten     DEC 10                
+07D 0000 |  sq_x       DEC 0                 
+         |                                  
+         |                                  
+         |                                  
+07E 0000 |  mult       DEC 0                 
+07F A000 |             CLEAR                 
+080 20B3 |             STORE mult_i          
+081 20B4 |             STORE mult_sum        
+082 20B5 |             STORE mult_signo      
+         |                                  
+083 10B1 |             LOAD mult_x          /Check signos
+084 8000 |             SKIPCOND 000          
+085 9089 |             JUMP m_second         
+086 10B5 |             LOAD mult_signo       
+087 30B6 |             ADD mult_one          
+088 20B5 |             STORE mult_signo      
+089 10B2 |  m_second   LOAD mult_y           
+08A 8000 |             SKIPCOND 000          
+08B 908F |             JUMP m_start          
+08C 10B5 |             LOAD mult_signo       
+08D 30B6 |             ADD mult_one          
+08E 20B5 |             STORE mult_signo      
+         |                                  
+08F 10B1 |  m_start    LOAD mult_x          /Convertirlos en positivos
+090 20F9 |             STORE abs_x           
+091 00F2 |             JNS abs               
+092 20B1 |             STORE mult_x          
+093 10B2 |             LOAD mult_y           
+094 20F9 |             STORE abs_x           
+095 00F2 |             JNS abs               
+096 20B2 |             STORE mult_y          
+         |                                  
+097 A000 |             CLEAR                 
+098 20B4 |             STORE mult_sum        
+099 20B3 |             STORE mult_i          
+09A 40B2 |  m_while    SUBT mult_y           
+09B 8000 |             SKIPCOND 000          
+09C 90A4 |             JUMP m_endwhile       
+09D 10B4 |             LOAD mult_sum         
+09E 30B1 |             ADD mult_x            
+09F 20B4 |             STORE mult_sum        
+0A0 10B3 |             LOAD mult_i           
+0A1 30B6 |             ADD mult_one          
+0A2 20B3 |             STORE mult_i          
+0A3 909A |             JUMP m_while          
+         |                                  
+0A4 10B5 |  m_endwhile LOAD mult_signo      /Verificar el signo final de la division
+0A5 8400 |             SKIPCOND 400          
+0A6 90A8 |             JUMP m_checktwo       
+0A7 90AF |             JUMP m_return         
+0A8 40B7 |  m_checktwo SUBT mult_two         
+0A9 8400 |             SKIPCOND 400          
+0AA 90AC |             JUMP m_negate         
+0AB 90AF |             JUMP m_return         
+         |                                  
+0AC A000 |  m_negate   CLEAR                 
+0AD 40B4 |             SUBT mult_sum         
+0AE 20B4 |             STORE mult_sum        
+         |                                  
+0AF 10B4 |  m_return   LOAD mult_sum         
+0B0 C07E |             JUMPI mult            
+         |                                  
+0B1 0000 |  mult_x     DEC 0                 
+0B2 0000 |  mult_y     DEC 0                 
+0B3 0000 |  mult_i     DEC 0                 
+0B4 0000 |  mult_sum   DEC 0                 
+0B5 0000 |  mult_signo DEC 0                 
+0B6 0001 |  mult_one   DEC 1                 
+0B7 0002 |  mult_two   DEC 2                 
+         |                                  
+         |                                  
+         |                                  
+0B8 0000 |  div        DEC 0                 
+0B9 A000 |             CLEAR                 
+0BA 20EE |             STORE div_result      
+0BB 20EF |             STORE div_signo       
+         |                                  
+0BC 10EC |             LOAD div_x           /Check signos
+0BD 8000 |             SKIPCOND 000          
+0BE 90C2 |             JUMP d_second         
+0BF 10EF |             LOAD div_signo        
+0C0 30F0 |             ADD div_one           
+0C1 20EF |             STORE div_signo       
+0C2 10ED |  d_second   LOAD div_y            
+0C3 8000 |             SKIPCOND 000          
+0C4 90C8 |             JUMP d_start          
+0C5 10EF |             LOAD div_signo        
+0C6 30F0 |             ADD div_one           
+0C7 20EF |             STORE div_signo       
+         |                                  
+0C8 10EC |  d_start    LOAD div_x           /Convertirlos en positivos
+0C9 20F9 |             STORE abs_x           
+0CA 00F2 |             JNS abs               
+0CB 20EC |             STORE div_x           
+0CC 10ED |             LOAD div_y            
+0CD 20F9 |             STORE abs_x           
+0CE 00F2 |             JNS abs               
+0CF 20ED |             STORE div_y           
+         |                                  
+0D0 A000 |             CLEAR                /Iniciar la division 
+0D1 20EE |             STORE div_result      
+0D2 10EC |             LOAD div_x            
+0D3 40ED |  d_while    SUBT div_y            
+0D4 8800 |             SKIPCOND 800          
+0D5 90DC |             JUMP equals           
+0D6 20EC |  operation  STORE div_x           
+0D7 10EE |             LOAD div_result       
+0D8 30F0 |             ADD div_one           
+0D9 20EE |             STORE div_result      
+0DA 10EC |             LOAD div_x            
+0DB 90D3 |             JUMP d_while          
+0DC 8400 |  equals     SKIPCOND 400          
+0DD 90DF |             JUMP d_endwhile       
+0DE 90D6 |             JUMP operation        
+         |                                  
+0DF 10EF |  d_endwhile LOAD div_signo       /Verificar el signo final de la division
+0E0 8400 |             SKIPCOND 400          
+0E1 90E3 |             JUMP d_checktwo       
+0E2 90EA |             JUMP d_return         
+0E3 40F1 |  d_checktwo SUBT div_two          
+0E4 8400 |             SKIPCOND 400          
+0E5 90E7 |             JUMP d_negate         
+0E6 90EA |             JUMP d_return         
+         |                                  
+0E7 A000 |  d_negate   CLEAR                 
+0E8 40EE |             SUBT div_result       
+0E9 20EE |             STORE div_result      
+         |                                  
+0EA 10EE |  d_return   LOAD div_result       
+0EB C0B8 |             JUMPI div             
+         |                                              
+0EC 0000 |  div_x      DEC 0                 
+0ED 0000 |  div_y      DEC 0                 
+0EE 0000 |  div_result DEC 0                 
+0EF 0000 |  div_signo  DEC 0                 
+0F0 0001 |  div_one    DEC 1                 
+0F1 0002 |  div_two    DEC 2                 
+         |                                  
+         |                                  
+         |                                  
+0F2 0000 |  abs        DEC 0                 
+0F3 10F9 |             LOAD abs_x            
+0F4 8000 |             SKIPCOND 000          
+0F5 C0F2 |             JUMPI abs             
+0F6 10FA |             LOAD abs_res          
+0F7 40F9 |             SUBT abs_x            
+0F8 C0F2 |             JUMPI abs             
+         |                                  
+0F9 0000 |  abs_x      DEC 0                 
+0FA 0000 |  abs_res    DEC 0                 
+
+Assembly successful.
+
+         SYMBOL TABLE
+         ------------------------------------------------------
+          Symbol     | Defined | References 
+         ------------+---------+-------------------------------
+          a          |   04C   | 001, 010, 022
+          abs        |   0F2   | 091, 095, 0CA, 0CE, 0F5, 0F8
+          abs_res    |   0FA   | 0F6
+          abs_x      |   0F9   | 090, 094, 0C9, 0CD, 0F3, 0F7
+          b          |   04D   | 003, 007, 009
+          b_neg      |   050   | 008, 033, 03E
+          bsq        |   04F   | 00D, 018
+          c          |   04E   | 005, 014
+          calcsqrt   |   030   | 02C
+          checkzero  |   02B   | 028
+          d_checktwo |   0E3   | 0E1
+          d_endwhile |   0DF   | 0DD
+          d_negate   |   0E7   | 0E5
+          d_return   |   0EA   | 0E2, 0E6
+          d_second   |   0C2   | 0BE
+          d_start    |   0C8   | 0C4
+          d_while    |   0D3   | 0DB
+          disc       |   051   | 017, 019, 01A, 01F, 026
+          div        |   0B8   | 01E, 03C, 047, 0EB
+          div_one    |   0F0   | 0C0, 0C6, 0D8
+          div_result |   0EE   | 0BA, 0D1, 0D7, 0D9, 0E8, 0E9, 
+                     |         | 0EA
+          div_signo  |   0EF   | 0BB, 0BF, 0C1, 0C5, 0C7, 0DF
+          div_two    |   0F1   | 0E3
+          div_x      |   0EC   | 01B, 039, 044, 0BC, 0C8, 0CB, 
+                     |         | 0D2, 0D6, 0DA
+          div_y      |   0ED   | 01D, 03B, 046, 0C2, 0CC, 0CF, 
+                     |         | 0D3
+          end        |   04B   | 049
+          equals     |   0DC   | 0D5
+          four       |   056   | 00E
+          m_checktwo |   0A8   | 0A6
+          m_endwhile |   0A4   | 09C
+          m_negate   |   0AC   | 0AA
+          m_return   |   0AF   | 0A7, 0AB
+          m_second   |   089   | 085
+          m_start    |   08F   | 08B
+          m_while    |   09A   | 0A3
+          mult       |   07E   | 00C, 012, 016, 024, 038, 043, 
+                     |         | 05D, 073, 0B0
+          mult_i     |   0B3   | 080, 099, 0A0, 0A2
+          mult_one   |   0B6   | 087, 08D, 0A1
+          mult_signo |   0B5   | 082, 086, 088, 08C, 08E, 0A4
+          mult_sum   |   0B4   | 081, 098, 09D, 09F, 0AD, 0AE, 
+                     |         | 0AF
+          mult_two   |   0B7   | 0A8
+          mult_x     |   0B1   | 00A, 00F, 013, 021, 035, 040, 
+                     |         | 05A, 071, 083, 08F, 092, 09E
+          mult_y     |   0B2   | 00B, 011, 015, 023, 037, 042, 
+                     |         | 05C, 072, 089, 093, 096, 09A
+          one_neg    |   054   | 029
+          operation  |   0D6   | 0DE
+          out        |   04A   | 02A
+          partTwo    |   03E   | 02F
+          sq_endwh   |   076   | 06D
+          sq_eqone   |   062   | 060
+          sq_eqwh    |   06C   | 06A
+          sq_gen     |   067   | 064, 075
+          sq_i       |   07A   | 06E, 070, 076
+          sq_one     |   079   | 06F, 077
+          sq_result  |   07B   | 067, 074
+          sq_ten     |   07C   | 05B, 062
+          sq_wh      |   06E   | 06B
+          sq_x       |   07D   | 030, 059, 05E, 065, 068
+          sqroot     |   058   | 031, 061, 066, 078
+          sqrtdisc   |   052   | 02E, 032, 034, 03F
+          ten        |   057   | 01C, 036, 041
+          two        |   055   | 020
+          twoa       |   053   | 025, 03A, 045
+         ------------------------------------------------------
+
+

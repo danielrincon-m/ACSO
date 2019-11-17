@@ -1,0 +1,10 @@
+abs,        dec         0
+            load        abs_x
+            skipcond    000
+            jumpi       abs
+            load        abs_res
+            subt        abs_x
+            jumpi       abs
+
+abs_x,       dec         0
+abs_res,     dec         0
