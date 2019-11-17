@@ -1,0 +1,6 @@
+/ Calcular las distancias entre los puntos (a, b, c)
+/ Calcular cada ángulo (A, B, C)
+/ Si algún ángulo es > a 90°, es Obtusángulo (Cos a < 0)
+/ Si algún ángulo es = a 90°, es Rectángulo (Cos a = 0)
+/ Si todos los ángulos son < a 90°, es Acutángulo (Cos a > 0)
+/ Si algún ángulo es = a 180° no hay triángulo (cos a = -1)

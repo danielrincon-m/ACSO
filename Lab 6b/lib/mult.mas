@@ -1,0 +1,78 @@
+mult,       dec         0
+            clear
+            store       mult_i
+            store       mult_sum
+            store       mult_signo
+
+            load        mult_x           /Check signos
+            skipcond    000
+            jump        m_second
+            load        mult_signo
+            add         mult_one
+            store       mult_signo
+m_second,   load        mult_y
+            skipcond    000
+            jump        m_start
+            load        mult_signo
+            add         mult_one
+            store       mult_signo
+
+m_start,    load        mult_x           /Convertirlos en positivos
+            store       abs_x
+            jns         abs
+            store       mult_x
+            load        mult_y
+            store       abs_x
+            jns         abs
+            store       mult_y
+
+            clear
+            store       mult_sum
+            store       mult_i
+m_while,    subt        mult_y
+            skipcond    000
+            jump        m_endwhile
+            load        mult_sum
+            add         mult_x
+            store       mult_sum
+            load        mult_i
+            add         mult_one
+            store       mult_i
+            jump        m_while
+
+m_endwhile, load        mult_signo       /Verificar el signo final de la division
+            skipcond    400
+            jump        m_checktwo
+            jump        m_return
+m_checktwo, subt        mult_two
+            skipcond    400
+            jump        m_negate
+            jump        m_return
+
+m_negate,   clear
+            subt        mult_sum
+            store       mult_sum
+
+m_return,   load		mult_sum
+            jumpi       mult
+
+mult_x,     dec         0
+mult_y,     dec         0
+mult_i,     dec         0
+mult_sum,   dec         0
+mult_signo, dec         0
+mult_one,   dec         1
+mult_two,   dec         2
+
+
+
+abs,        dec         0
+            load        abs_x
+            skipcond    000
+            jumpi       abs
+            load        abs_res
+            subt        abs_x
+            jumpi       abs
+
+abs_x,       dec         0
+abs_res,     dec         0
