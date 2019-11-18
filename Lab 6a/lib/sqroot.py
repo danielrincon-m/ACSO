@@ -1,5 +1,5 @@
 def sqroot(x):
-    x *= 10
+    #x *= 10
     if (x == 0 or x == 1): 
         return x
     i, intResult = 1, 1
@@ -12,6 +12,6 @@ def sqroot(x):
 
 
 def main():
-    print(sqroot(193))
+    print(sqroot(18))
 
 main()

@@ -1,6 +1,444 @@
+            input                       /Entrada
+            store       xa
+            input
+            store       ya
+            input
+            store       xb
+            input
+            store       yb
+            input
+            store       xc
+            input
+            store       yc
+
+            load        xa              /Distancia a-b
+            store       dist_x1
+            load        xb
+            store       dist_x2
+            load        ya
+            store       dist_y1
+            load        yb
+            store       dist_y2
+            jns         dist
+            /output
+            store       disab
+
+            load        xb              /Distancia b-c
+            store       dist_x1
+            load        xc
+            store       dist_x2
+            load        yb
+            store       dist_y1
+            load        yc
+            store       dist_y2
+            jns         dist
+            /output
+            store       disbc
+
+            load        xc              /Distancia c-a
+            store       dist_x1
+            load        xa
+            store       dist_x2
+            load        yc
+            store       dist_y1
+            load        ya
+            store       dist_y2
+            jns         dist
+            /output
+            store       disca
+
+            load        disbc           /Cos del angulo A
+            store       cosa_a
+            load        disca
+            store       cosa_b
+            load        disab
+            store       cosa_c
+            jns         cosang
+            /output
+            store       cosA
+
+            load        disca           /Cos del angulo B
+            store       cosa_a
+            load        disab
+            store       cosa_b
+            load        disbc
+            store       cosa_c
+            jns         cosang
+            /output
+            store       cosB
+
+            load        disab           /Cos del angulo C
+            store       cosa_a
+            load        disbc
+            store       cosa_b
+            load        disca
+            store       cosa_c
+            jns         cosang
+            /output
+            store       cosC
+
+            load        cosA
+            add         ten
+            skipcond    400
+            jump        obtA
+            load        one_neg
+            jump        end 
+obtA,       load        cosA
+            skipcond    000
+            jump        recA
+            load        two
+            jump        end           
+recA,       load        cosA
+            skipcond    400
+            jump        chkB
+            load        three
+            jump        end
+
+chkB,       load        cosB
+            add         ten
+            skipcond    400
+            jump        obtB
+            load        one_neg
+            jump        end
+obtB,       load        cosB
+            skipcond    000
+            jump        recB
+            load        two
+            jump        end
+recB,       load        cosB
+            skipcond    400
+            jump        chkC
+            load        three
+            jump        end
+
+chkC,       load        cosC
+            add         ten
+            skipcond    400
+            jump        obtC
+            load        one_neg
+            jump        end
+obtC,       load        cosC
+            skipcond    000
+            jump        recC
+            load        two
+            jump        end
+recC,       load        cosC
+            skipcond    400
+            jump        acuEnd
+            load        three
+            jump        end
+
+acuEnd,     load        one
+
+end,        output
+            halt
+
+one,        dec         1
+one_neg,    dec         -1
+two,        dec         2
+three,      dec         3
+ten,        dec         10
+
+xa,         dec         0
+ya,         dec         0
+xb,         dec         0
+yb,         dec         0
+xc,         dec         0
+yc,         dec         0
+disab,      dec         0
+disbc,      dec         0
+disca,      dec         0
+cosA,       dec         0
+cosB,       dec         0
+cosC,       dec         0
+
+/ Si algún ángulo es = a 180° no hay triángulo (cos a = -1) (-1)
+/ Si algún ángulo es > a 90°, es Obtusángulo (Cos a < 0) (2)
+/ Si algún ángulo es = a 90°, es Rectángulo (Cos a = 0) (3)
+/ Si todos los ángulos son < a 90°, es Acutángulo (Cos a > 0) (1)
+
 / Calcular las distancias entre los puntos (a, b, c)
-/ Calcular cada ángulo (A, B, C)
-/ Si algún ángulo es > a 90°, es Obtusángulo (Cos a < 0)
-/ Si algún ángulo es = a 90°, es Rectángulo (Cos a = 0)
-/ Si todos los ángulos son < a 90°, es Acutángulo (Cos a > 0)
-/ Si algún ángulo es = a 180° no hay triángulo (cos a = -1)
+dist,       dec         0
+            load        dist_x2         /(x2-x1)**2
+            subt        dist_x1
+            store       mult_x
+            store       mult_y
+            jns         mult
+            store       dist_c1
+
+            load        dist_y2         /(y2-y1)**2
+            subt        dist_y1
+            store       mult_x
+            store       mult_y
+            jns         mult
+            store       dist_c2
+
+            load        dist_c1         /sqrt(c1 + c2)
+            add         dist_c2
+            store       sq_x
+            jns         sqroot
+            jumpi       dist
+
+dist_x1,    dec         0
+dist_x2,    dec         0
+dist_y1,    dec         0
+dist_y2,    dec         0
+dist_c1,    dec         0
+dist_c2,    dec         0
+
+
+
+/ Calcular el coseno cada ángulo (A, B, C)
+cosang,     dec         0
+            clear
+            store       cosa_asq
+            store       cosa_bsq
+            store       cosa_csq
+            store       cosa_twobc
+
+            load        cosa_a          /Calcular a**2
+            store       mult_x
+            store       mult_y
+            jns         mult
+            store       cosa_asq
+
+            load        cosa_b          /Calcular b**2
+            store       mult_x
+            store       mult_y
+            jns         mult
+            store       cosa_bsq
+
+            load        cosa_c          /Calcular c**2
+            store       mult_x
+            store       mult_y
+            jns         mult
+            store       cosa_csq
+
+            load        cosa_two        /Calcular 2bc
+            store       mult_x
+            load        cosa_b
+            store       mult_y
+            jns         mult
+            store       mult_x
+            load        cosa_c
+            store       mult_y
+            jns         mult
+            store       cosa_twobc
+
+            load        cosa_bsq        /Realizar la division
+            add         cosa_csq
+            subt        cosa_asq
+            store       mult_x
+            load        cosa_ten
+            store       mult_y
+            jns         mult
+            store       div_x
+            load        cosa_twobc
+            store       div_y
+            jns         div
+            jumpi       cosang
+
+cosa_a,     dec         0
+cosa_b,     dec         0
+cosa_c,     dec         0
+cosa_asq,   dec         0
+cosa_bsq,   dec         0
+cosa_csq,   dec         0
+cosa_twobc, dec         0
+cosa_two,   dec         2
+cosa_ten,   dec         10
+
+
+
+/libs
+sqroot,     dec         0        
+            load        sq_one
+            store       sq_i
+            store       sq_result
+
+            load        sq_x
+            skipcond    400             /Verificar casos base
+            jump        sq_eqone
+            jumpi       sqroot
+sq_eqone,   subt        sq_ten
+            skipcond    400
+            jump        sq_gen
+            load        sq_x
+            jumpi       sqroot
+
+sq_gen,     load        sq_result       /Caso general
+            subt        sq_x
+            skipcond    000
+            jump        sq_eqwh
+            jump        sq_wh
+sq_eqwh,    skipcond    400
+            jump        sq_endwh
+sq_wh,      load        sq_i
+            add         sq_one
+            store       sq_i
+            store       mult_x
+            store       mult_y
+            jns         mult
+            store       sq_result
+            jump        sq_gen
+sq_endwh,   load        sq_i
+            subt        sq_one
+            jumpi       sqroot
+
+sq_one,     dec         1
+sq_ten,     dec         10
+sq_i,       dec         1
+sq_result,  dec         1
+sq_x,       dec         0
+
+
+
+mult,       dec         0
+            clear
+            store       mult_i
+            store       mult_sum
+            store       mult_signo
+
+            load        mult_x           /Check signos
+            skipcond    000
+            jump        m_second
+            load        mult_signo
+            add         mult_one
+            store       mult_signo
+m_second,   load        mult_y
+            skipcond    000
+            jump        m_start
+            load        mult_signo
+            add         mult_one
+            store       mult_signo
+
+m_start,    load        mult_x           /Convertirlos en positivos
+            store       abs_x
+            jns         abs
+            store       mult_x
+            load        mult_y
+            store       abs_x
+            jns         abs
+            store       mult_y
+
+            clear
+            store       mult_sum
+            store       mult_i
+m_while,    subt        mult_y
+            skipcond    000
+            jump        m_endwhile
+            load        mult_sum
+            add         mult_x
+            store       mult_sum
+            load        mult_i
+            add         mult_one
+            store       mult_i
+            jump        m_while
+
+m_endwhile, load        mult_signo       /Verificar el signo final de la multiplicacion
+            skipcond    400
+            jump        m_checktwo
+            jump        m_return
+m_checktwo, subt        mult_two
+            skipcond    400
+            jump        m_negate
+            jump        m_return
+
+m_negate,   clear
+            subt        mult_sum
+            store       mult_sum
+
+m_return,   load		mult_sum
+            jumpi       mult
+
+mult_x,     dec         0
+mult_y,     dec         0
+mult_i,     dec         0
+mult_sum,   dec         0
+mult_signo, dec         0
+mult_one,   dec         1
+mult_two,   dec         2
+
+
+
+div,		dec		    0
+            clear
+            store       div_result
+            store       div_signo
+
+            load        div_x           /Check signos
+            skipcond    000
+            jump        d_second
+            load        div_signo
+            add         div_one
+            store       div_signo
+d_second,   load        div_y
+            skipcond    000
+            jump        d_start
+            load        div_signo
+            add         div_one
+            store       div_signo
+
+d_start,    load        div_x           /Convertirlos en positivos
+            store       abs_x
+            jns         abs
+            store       div_x
+            load        div_y
+            store       abs_x
+            jns         abs
+            store       div_y
+
+            clear                       /Iniciar la division 
+            store		div_result
+            load		div_x
+d_while,    subt		div_y
+            skipcond	800
+            jump		equals
+operation,	store		div_x
+            load		div_result
+            add		    div_one
+            store		div_result
+            load		div_x
+            jump		d_while
+equals,		skipcond	400
+            jump		d_endwhile
+            jump		operation
+
+d_endwhile,	load        div_signo       /Verificar el signo final de la division
+            skipcond    400
+            jump        d_checktwo
+            jump        d_return
+d_checktwo, subt        div_two
+            skipcond    400
+            jump        d_negate
+            jump        d_return
+
+d_negate,   clear
+            subt        div_result
+            store       div_result
+
+d_return,   load		div_result
+            jumpI		div
+            
+div_x,		dec		    0
+div_y,		dec		    0
+div_result,	dec		    0
+div_signo,  dec         0
+div_one,	dec		    1
+div_two,    dec         2
+
+
+
+abs,        dec         0
+            clear
+            store       abs_res
+
+            load        abs_x
+            skipcond    000
+            jumpi       abs
+            load        abs_res
+            subt        abs_x
+            jumpi       abs
+
+abs_x,       dec         0
+abs_res,     dec         0
