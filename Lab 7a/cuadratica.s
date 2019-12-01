@@ -72,7 +72,7 @@ exit:       MOV     R7, #1
             SVC     0
 
 aa:         .word   15000
-bb:         .word   -30000
+bb:         .word   -35000
 cc:         .word   15000
 mcons:      .word   10000
 
