@@ -16,6 +16,11 @@ twoa:       .word   0
 .global _start
 
 _start:
+            LDR     R0, aa
+            CMP     R0, #0
+            MOVEQ   R0, #-1  
+            BEQ     exit
+
             LDR     R0, bb              @-b
             MOV     R1, #0
             SUB     R2, R1, R0

@@ -5,7 +5,13 @@
             input       
             store       c
 
-            clear                   /Calcular -b
+            load        a
+            skipcond    400
+            jump        start
+            load        one_neg
+            jump        out
+
+start,      clear                   /Calcular -b
             subt        b
             store       b_neg
 
