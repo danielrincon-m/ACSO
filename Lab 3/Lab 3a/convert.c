@@ -1,15 +1,19 @@
 #include <stdio.h>
 #include <stdbool.h>
-#define SIZE 1000
+#define SIZE 50
 
 
 void getInput(bool *esNegativo, int *decEntero, int *decReal){
 	bool esParteEntera = true;
 	char actualChar;
 	int actualIndex = 0;
+
+	while((actualChar = getchar()) == '\n'){
+		//No hacer nada
+	}
 	
 	//Obtener la entrada tanto decimal como entera
-	while((actualChar = getchar()) != '\n'){
+	while(actualChar != '\n'){
 		//Si se encuentra un signo negativo, tener en cuenta
 		if (actualChar == '-'){
 			*esNegativo = true;
@@ -26,6 +30,7 @@ void getInput(bool *esNegativo, int *decEntero, int *decReal){
 			decReal[actualIndex] = (int)actualChar - 48;
 			actualIndex ++;
 		}
+		actualChar = getchar();
 	}
 	
 	//Pasar decReal a la derecha
@@ -110,9 +115,9 @@ void calcParteEntera(int* decEntero, int *binEntero){
 			indexBin++;		
 		}
 	}
-//	for (i = 0; i < SIZE; i++){
-//		printf("%d ", binEntero[i]);
-//	}
+	for (i = 0; i < SIZE; i++){
+	printf("%d ", binEntero[i]);
+	}
 }
 
 
@@ -128,14 +133,14 @@ int multiplicar(int *decReal, int multiplicador){
 	for (i = 0; i < SIZE; i++){
 		resultado[i] = -1;
 	}
-	//Calcular posición decimal
+	//Calcular posiciï¿½n decimal
 	for (i = SIZE - 1; i >= 0; i--){
 		if (decReal[i] == -1){
 			posDecimal = i;
 			break;
 		}
 	}
-	//Realizar la multiplicación
+	//Realizar la multiplicaciï¿½n
 	for (i = SIZE - 1; i >= 0; i--){
 		if (decReal[i] == -1) break;
 		multiplicacion = decReal[i] * multiplicador + lleva;
@@ -198,33 +203,64 @@ void calcParteDec(int *decReal, int *binReal){
 	
 	printf("%c", '\n');
 	for (i = 0; i < SIZE; i++){
-		printf("%d ", binReal[i]);
+	printf("%d ", binReal[i]);
 	}
+	printf("%c", '\n');
 }
 
+void printAns(bool esNegativo, int *binEntero, int *binReal){
+	int i;
+
+	if (esNegativo){
+		printf("%c", '-');
+	}
+
+	for (i = 0; i < SIZE; i++){
+		if (binEntero[i] == -1) break;
+		printf("%d", binEntero[i]);
+	}
+
+	if (binReal[0] == -1) {
+		printf("%c", '\n');
+		return;
+	}
+
+	printf("%c", '.');
+
+	for (i = 0; i < SIZE; i++){
+		if (binReal[i] == -1) break;
+		printf("%d", binReal[i]);
+	}
+
+	printf("%c", '\n');
+}
 
 int main(){
-	bool esNegativo = false;
+	bool esNegativo;
 	int decEntero[SIZE];
-	int decReal[SIZE];
+	int decReal[SIZE]; 
 	int binEntero[SIZE];
 	int binReal[SIZE];
-	int i;
-	
-	//Inicializar las listas en -1
-	for (i = 0; i < SIZE; i++){
-		decEntero[i] = -1;
-		decReal[i] = -1;
+	int casos;
+	int c, i;
+
+	scanf("%d", &casos);
+
+	for (c = 0; c < casos; c++){
+		//Inicializar las listas en -1
+		for (i = 0; i < SIZE; i++){
+			decEntero[i] = -1;
+			decReal[i] = -1;
+			binEntero[i] = -1;
+			binReal[i] = -1;
+		}
+		esNegativo = false;
+		
+		getInput(&esNegativo, decEntero, decReal);
+		calcParteEntera(decEntero, binEntero);
+		calcParteDec(decReal, binReal);
+		printAns(esNegativo, binEntero, binReal);
 	}
-	for (i = 0; i < SIZE; i++){
-		binEntero[i] = -1;
-		binReal[i] = -1;
-	}
-	
-	getInput(&esNegativo, decEntero, decReal);
-	calcParteEntera(decEntero, binEntero);
-	//multiplicar(decReal, 5);
-	calcParteDec(decReal, binReal);
 
 	return 0;
 }

@@ -76,10 +76,10 @@ posop:      MOV     R5, R2              @Hacerlo con la parte positiva y el resu
 exit:       MOV     R7, #1
             SVC     0
 
-aa:         .word   15000
-bb:         .word   -35000
-cc:         .word   15000
-mcons:      .word   10000
+aa:         .word   -2
+bb:         .word   -3
+cc:         .word   -1
+mcons:      .word   100000
 
 
 sqrt:

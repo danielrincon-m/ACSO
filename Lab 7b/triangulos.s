@@ -157,11 +157,11 @@ two:        .word       0x40000000
 three:      .word       0x40400000
 ten:        .word       0x41200000
 
-xa:         .word       0x00000000
-ya:         .word       0x00000000
-xb:         .word       0x40200000
-yb:         .word       0x40A00000
-xc:         .word       0x40A00000 
+xa:         .word       0x40000000
+ya:         .word       0x40000000
+xb:         .word       0x3F800000
+yb:         .word       0x3F800000
+xc:         .word       0x00000000
 yc:         .word       0x00000000
             
 
