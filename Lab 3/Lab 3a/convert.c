@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdbool.h>
-#define SIZE 50
+#define SIZE 5000
 
 
 void getInput(bool *esNegativo, int *decEntero, int *decReal){
@@ -8,13 +8,15 @@ void getInput(bool *esNegativo, int *decEntero, int *decReal){
 	char actualChar;
 	int actualIndex = 0;
 
-	while((actualChar = getchar()) == '\n'){
-		//No hacer nada
+    actualChar = getchar();
+    while(actualChar < 48 || actualChar > 57){
+		actualChar = getchar();
 	}
 	
 	//Obtener la entrada tanto decimal como entera
-	while(actualChar != '\n'){
-		//Si se encuentra un signo negativo, tener en cuenta
+	while(actualChar >= 48 && actualChar <= 57){
+
+        //Si se encuentra un signo negativo, tener en cuenta
 		if (actualChar == '-'){
 			*esNegativo = true;
 		}else if (actualChar == '.'){
@@ -34,15 +36,15 @@ void getInput(bool *esNegativo, int *decEntero, int *decReal){
 	}
 	
 	//Pasar decReal a la derecha
-	int inputIndex = SIZE - 1;
-	int i;
-	for(i = SIZE - 1; i >= 0; i--){
-		if(decReal[i] != -1){
-			decReal[inputIndex] = decReal[i];
-			decReal[i] = -1;
-			inputIndex--;
-		}
-	}
+	// int inputIndex = SIZE - 1;
+	// int i;
+	// for(i = SIZE - 1; i >= 0; i--){
+	// 	if(decReal[i] != -1){
+	// 		decReal[inputIndex] = decReal[i];
+	// 		decReal[i] = -1;
+	// 		inputIndex--;
+	// 	}
+	// }
 }
 
 
@@ -57,7 +59,7 @@ int dividir(int *decEntero, int divisor){
 		resultado[i] = -1;
 	}
 	
-	while(currentIndex < SIZE){
+	while(currentIndex < SIZE && resultIndex < SIZE){
 		//printf("%d%c", dividendo, '\n');
 		if(divisor > dividendo){
 			currentIndex++;
@@ -102,7 +104,7 @@ void calcParteEntera(int* decEntero, int *binEntero){
 	int result;
 	int i;
 	
-	while(decEntero[0] != -1){
+	while(decEntero[0] != -1 && indexBin >= 0){
 		result = dividir(decEntero, 2);
 		binEntero[indexBin] = result;
 		indexBin--;
@@ -114,9 +116,6 @@ void calcParteEntera(int* decEntero, int *binEntero){
 			binEntero[i] = -1;
 			indexBin++;		
 		}
-	}
-	for (i = 0; i < SIZE; i++){
-	printf("%d ", binEntero[i]);
 	}
 }
 
@@ -134,19 +133,22 @@ int multiplicar(int *decReal, int multiplicador){
 		resultado[i] = -1;
 	}
 	//Calcular posici�n decimal
-	for (i = SIZE - 1; i >= 0; i--){
-		if (decReal[i] == -1){
-			posDecimal = i;
-			break;
-		}
-	}
+	// for (i = SIZE - 1; i >= 0; i--){
+	// 	if (decReal[i] == -1){
+	// 		posDecimal = i;
+	// 		break;
+	// 	}
+	// }
+
 	//Realizar la multiplicaci�n
 	for (i = SIZE - 1; i >= 0; i--){
-		if (decReal[i] == -1) break;
+		if (decReal[i] == -1) continue;
+
 		multiplicacion = decReal[i] * multiplicador + lleva;
 		lleva = 0;
+
 		if (multiplicacion >= 10){
-			if (decReal[i - 1] == -1) decReal[i - 1] = 0;
+			// if (decReal[i - 1] == -1) decReal[i - 1] = 0;
 			lleva = multiplicacion / 10;
 			multiplicacion = multiplicacion % 10;
 		}
@@ -154,14 +156,7 @@ int multiplicar(int *decReal, int multiplicador){
 	}	
 	//Escribir el resultado
 	for (i = SIZE - 1; i >= 0; i--){
-		if(i <= posDecimal){
-			decReal[i] = -1;
-			if(resultado[i] != -1){
-				parteEntera = parteEntera * 10 + resultado[i];
-			}
-		}else{
-			decReal[i] = resultado[i];
-		}
+		decReal[i] = resultado[i];
 	}
 	
 //	printf("%c", '\n');
@@ -175,18 +170,17 @@ int multiplicar(int *decReal, int multiplicador){
 //	printf("%c", '\n');
 //	printf("%d", parteEntera);
 
-	return parteEntera;
+	return lleva;
 }
 
 
 bool isEmpty(int *decReal){
 	int i;
-	bool empty = true;
 	
 	for(i = 0; i < SIZE; i++){
-		if (decReal[i] != 0 && decReal[i] != -1) empty = false;
+		if (decReal[i] != 0 && decReal[i] != -1) return false;
 	}
-	return empty;
+	return true;
 }
 
 
@@ -195,42 +189,50 @@ void calcParteDec(int *decReal, int *binReal){
 	int result;
 	int i;
 	
-	while(!isEmpty(decReal)){
+	while(!isEmpty(decReal) && binIndex < SIZE){
 		result = multiplicar(decReal, 2);
 		binReal[binIndex] = result;
 		binIndex++;
 	}
-	
-	printf("%c", '\n');
-	for (i = 0; i < SIZE; i++){
-	printf("%d ", binReal[i]);
-	}
-	printf("%c", '\n');
 }
 
 void printAns(bool esNegativo, int *binEntero, int *binReal){
 	int i;
+    int charCount = 0;
+    int maxChars = 1000;
 
-	if (esNegativo){
+    if (esNegativo){
 		printf("%c", '-');
+        charCount += 1;
 	}
 
 	for (i = 0; i < SIZE; i++){
 		if (binEntero[i] == -1) break;
 		printf("%d", binEntero[i]);
-	}
+        charCount += 1;
+        if (charCount >= maxChars){
+            printf("%c", '\n');
+            return;
+        }
+    }
 
-	if (binReal[0] == -1) {
+	if (binReal[0] == -1 || charCount >= maxChars) {
 		printf("%c", '\n');
 		return;
 	}
 
 	printf("%c", '.');
+    charCount += 1;
 
-	for (i = 0; i < SIZE; i++){
+    for (i = 0; i < SIZE; i++){
 		if (binReal[i] == -1) break;
 		printf("%d", binReal[i]);
-	}
+        charCount += 1;
+        if (charCount >= maxChars){
+            printf("%c", '\n');
+            return;
+        }
+    }
 
 	printf("%c", '\n');
 }
@@ -259,6 +261,17 @@ int main(){
 		getInput(&esNegativo, decEntero, decReal);
 		calcParteEntera(decEntero, binEntero);
 		calcParteDec(decReal, binReal);
+
+        // for (i = 0; i < SIZE; i++){
+        //     printf("%d ", binEntero[i]);
+        // }
+
+        // printf("%c", '\n');
+        // for (i = 0; i < SIZE; i++){
+        //     printf("%d ", binReal[i]);
+        // }
+	    // printf("%c", '\n');     
+
 		printAns(esNegativo, binEntero, binReal);
 	}
 
